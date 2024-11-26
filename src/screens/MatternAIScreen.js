@@ -29,7 +29,7 @@ const MatternAIScreen = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([
     {
-      text: 'Hello! I'm MatternAI, your pregnancy companion. How can I help you today?',
+      text: "Hello! I'm MatternAI, your pregnancy companion. How can I help you today?",
       isUser: false,
     },
   ]);
