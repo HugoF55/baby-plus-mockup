@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.js": "/baby-plus-mockup/static/js/main.60adc50e.js",
+    "static/js/130.2dad7b6f.js": "/baby-plus-mockup/static/js/130.2dad7b6f.js",
+    "static/media/MaterialCommunityIcons.ttf": "/baby-plus-mockup/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
+    "index.html": "/baby-plus-mockup/index.html",
+    "serve.json": "/baby-plus-mockup/serve.json",
+    "manifest.json": "/baby-plus-mockup/manifest.json",
+    "main.60adc50e.js.map": "/baby-plus-mockup/static/js/main.60adc50e.js.map",
+    "130.2dad7b6f.js.map": "/baby-plus-mockup/static/js/130.2dad7b6f.js.map"
+  },
+  "entrypoints": [
+    "static/js/130.2dad7b6f.js",
+    "static/js/main.60adc50e.js"
+  ]
+}
