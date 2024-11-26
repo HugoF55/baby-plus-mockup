@@ -1,0 +1,244 @@
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import { Card, Title, Searchbar } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+const HomeScreen = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const FeaturedCourse = ({ title, instructor, duration, image }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('CourseDetails')}>
+      <Card style={styles.courseCard}>
+        <Card.Cover source={image} style={styles.courseImage} />
+        <Card.Content>
+          <Title style={styles.courseTitle}>{title}</Title>
+          <View style={styles.courseInfo}>
+            <MaterialCommunityIcons name="account" size={16} color="#666" />
+            <Text style={styles.courseText}>{instructor}</Text>
+            <MaterialCommunityIcons name="clock-outline" size={16} color="#666" />
+            <Text style={styles.courseText}>{duration}</Text>
+          </View>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
+  );
+
+  const ProfessionalCard = ({ name, specialty, rating, image }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('ProfessionalDetails')}>
+      <Card style={styles.professionalCard}>
+        <View style={styles.professionalContent}>
+          <Image source={image} style={styles.professionalImage} />
+          <View style={styles.professionalInfo}>
+            <Text style={styles.professionalName}>{name}</Text>
+            <Text style={styles.professionalSpecialty}>{specialty}</Text>
+            <View style={styles.ratingContainer}>
+              {[...Array(5)].map((_, i) => (
+                <MaterialCommunityIcons
+                  key={i}
+                  name={i < rating ? "star" : "star-outline"}
+                  size={16}
+                  color="#FFD700"
+                />
+              ))}
+            </View>
+          </View>
+        </View>
+      </Card>
+    </TouchableOpacity>
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.welcomeText}>Hello, Sarah!</Text>
+          <Text style={styles.subText}>How are you feeling today?</Text>
+        </View>
+
+        <View style={styles.searchContainer}>
+          <Searchbar
+            placeholder="Search courses, professionals..."
+            onChangeText={setSearchQuery}
+            value={searchQuery}
+            style={styles.searchBar}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Featured Courses</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <FeaturedCourse
+              title="Pregnancy Nutrition Essentials"
+              instructor="Dr. Emily Chen"
+              duration="2h 30m"
+              image={require('../assets/images/course1.png')}
+            />
+            <FeaturedCourse
+              title="Prenatal Yoga Basics"
+              instructor="Sarah Johnson"
+              duration="1h 45m"
+              image={require('../assets/images/course2.png')}
+            />
+          </ScrollView>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Top Professionals</Text>
+          <View style={styles.professionalsGrid}>
+            <ProfessionalCard
+              name="Dr. Maria Santos"
+              specialty="Obstetrician"
+              rating={5}
+              image={require('../assets/images/professional1.png')}
+            />
+            <ProfessionalCard
+              name="Dr. John Smith"
+              specialty="Nutritionist"
+              rating={4}
+              image={require('../assets/images/professional2.png')}
+            />
+          </View>
+        </View>
+
+        <View style={styles.aiSection}>
+          <TouchableOpacity 
+            style={styles.aiCard}
+            onPress={() => navigation.navigate('MatternAI')}
+          >
+            <MaterialCommunityIcons name="robot" size={40} color="#7e22ce" />
+            <View style={styles.aiContent}>
+              <Text style={styles.aiTitle}>Ask MatternAI</Text>
+              <Text style={styles.aiDescription}>
+                Get instant answers to your pregnancy questions
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  header: {
+    padding: 20,
+    backgroundColor: '#7e22ce',
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  subText: {
+    fontSize: 16,
+    color: '#ffffff',
+    opacity: 0.8,
+  },
+  searchContainer: {
+    padding: 15,
+  },
+  searchBar: {
+    borderRadius: 10,
+    elevation: 2,
+  },
+  section: {
+    padding: 15,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#333',
+  },
+  courseCard: {
+    width: 280,
+    marginRight: 15,
+    elevation: 3,
+  },
+  courseImage: {
+    height: 150,
+  },
+  courseTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  courseInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  courseText: {
+    marginLeft: 4,
+    marginRight: 12,
+    color: '#666',
+  },
+  professionalCard: {
+    marginBottom: 15,
+    elevation: 2,
+  },
+  professionalContent: {
+    flexDirection: 'row',
+    padding: 15,
+  },
+  professionalImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 15,
+  },
+  professionalInfo: {
+    flex: 1,
+  },
+  professionalName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  professionalSpecialty: {
+    color: '#666',
+    marginVertical: 4,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+  aiSection: {
+    padding: 15,
+    marginBottom: 20,
+  },
+  aiCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    elevation: 3,
+  },
+  aiContent: {
+    marginLeft: 15,
+    flex: 1,
+  },
+  aiTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#7e22ce',
+  },
+  aiDescription: {
+    color: '#666',
+    marginTop: 4,
+  },
+});
+
+export default HomeScreen;
